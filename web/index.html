@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080f19">
+  <meta name="description" content="SignalCore — experimental GSM security, localization, and handover simulator.">
+  <title>SignalCore — Network Simulation Console</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar" aria-label="Primary navigation">
+    <div class="brand">
+      <div class="brand-logo"><svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M6 20 18 7l12 13M10 23l8-9 8 9M14 27l4-5 4 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="29" r="2.5" fill="currentColor"/></svg></div>
+      <div><strong>SIGNAL<span>CORE</span></strong><small>ENGINEERING LAB / V2.0</small></div>
+    </div>
+    <div class="sidebar-label">WORKSPACE</div>
+    <nav id="nav" class="nav">
+      <button type="button" data-page="overview" class="nav-item active"><span class="nav-icon">◫</span>Command overview<span class="nav-kbd">01</span></button>
+      <button type="button" data-page="security" class="nav-item"><span class="nav-icon">◇</span>Authentication<span class="nav-kbd">02</span></button>
+      <button type="button" data-page="localization" class="nav-item"><span class="nav-icon">◎</span>Localization<span class="nav-kbd">03</span></button>
+      <button type="button" data-page="handover" class="nav-item"><span class="nav-icon">⇄</span>Handover engine<span class="nav-kbd">04</span></button>
+      <button type="button" data-page="validation" class="nav-item"><span class="nav-icon">▥</span>Validation lab<span class="nav-kbd">05</span></button>
+    </nav>
+    <div class="sidebar-label after-nav">SIMULATION SYSTEM</div>
+    <div class="side-status"><span class="status-light"></span><span>Engine available</span><strong id="engineStatus">CHECKING</strong></div>
+    <div class="side-mini"><span>Network topology</span><strong>4 BTS / 2 BSC</strong></div>
+    <div class="side-mini"><span>Operating mode</span><strong>SYNTHETIC</strong></div>
+    <div class="sidebar-bottom">
+      <div class="scope-card"><div class="scope-symbol">⌁</div><strong>Research environment</strong><p>Virtual nodes. Reproducible trials. No real radio transmission or subscriber data.</p><span>ACADEMIC SIMULATION ↗</span></div>
+      <a class="source-link" href="https://github.com/sanjaykumar3L/GSM-SIMULATOR" target="_blank" rel="noopener noreferrer"><span>⌘</span> View source on GitHub ↗</a>
+    </div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar">
+      <div class="top-left"><button class="mobile-menu" id="mobileMenu" aria-label="Toggle menu">☰</button><span class="breadcrumb">SIGNALCORE</span><span class="slash">/</span><strong id="breadcrumb">Command overview</strong></div>
+      <div class="top-right"><span class="env-chip"><i></i> SIMULATION MODE</span><span class="top-sep"></span><span id="clockLabel" class="clock">ENGINEERING CONSOLE</span><div class="avatar">SC</div></div>
+    </header>
+    <main class="content">
+      <section id="page-overview" class="page active" aria-labelledby="overview-title">
+        <div class="eyebrow"><span class="eyebrow-mark"></span> OPERATIONS / SYSTEM OVERVIEW</div>
+        <div class="page-head"><div><h1 id="overview-title">Network command <em>center.</em></h1><p>Observe, experiment, and validate a complete synthetic GSM network.</p></div><button class="button accent" id="runOverview">↻ &nbsp; Refresh network</button></div>
+        <div class="metric-grid">
+          <div class="metric"><div class="metric-line"><span>REGISTERED CELL SITES</span><span class="metric-glyph">⌁</span></div><div class="metric-number" id="metricTowers">04</div><div class="metric-foot"><span class="dot green"></span> All virtual base stations</div></div>
+          <div class="metric"><div class="metric-line"><span>NETWORK CONTROLLERS</span><span class="metric-glyph">▤</span></div><div class="metric-number" id="metricControllers">02</div><div class="metric-foot"><span class="dot cyan"></span> BSC-1 and BSC-2</div></div>
+          <div class="metric"><div class="metric-line"><span>ACTIVE SIMULATION</span><span class="metric-glyph">◈</span></div><div class="metric-number metric-text">READY</div><div class="metric-foot"><span class="dot green"></span> Python compute engine</div></div>
+          <div class="metric"><div class="metric-line"><span>EXPERIMENT MODULES</span><span class="metric-glyph">⊞</span></div><div class="metric-number" id="metricModules">03</div><div class="metric-foot"><span class="dot amber"></span> Independently testable</div></div>
+        </div>
+        <div class="main-grid">
+          <article class="panel topology-panel">
+            <div class="panel-head"><div><div class="panel-kicker">TOPOLOGY VIEW / 001</div><h2>Virtual network coverage</h2></div><span class="panel-badge">● SYNTHETIC LIVE VIEW</span></div>
+            <div class="topology-stage" id="overviewTopology" aria-label="Virtual topology of four GSM towers"><svg viewBox="0 0 680 370" role="img" aria-label="Four base stations connected to two controllers">
+              <defs><pattern id="gridPattern" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0V34" fill="none" stroke="#27394b" stroke-width=".55"/></pattern><radialGradient id="radialNetwork"><stop stop-color="#17baaa" stop-opacity=".17"/><stop offset="1" stop-color="#17baaa" stop-opacity="0"/></radialGradient></defs>
+              <rect width="680" height="370" fill="url(#gridPattern)"/><circle cx="340" cy="185" r="175" fill="url(#radialNetwork)"/>
+              <g class="topo-wires" fill="none" stroke="#3c8d92" stroke-width="1.3" stroke-dasharray="5 7"><path d="M145 100L340 185 530 100M145 270L340 185 530 270M145 100L145 270M530 100L530 270"/></g>
+              <g class="topo-rings" fill="none" stroke="#12adab" stroke-width="1" opacity=".37"><circle cx="145" cy="100" r="68"/><circle cx="530" cy="100" r="68"/><circle cx="145" cy="270" r="68"/><circle cx="530" cy="270" r="68"/></g>
+              <g class="topo-tower"><circle cx="145" cy="100" r="20"/><circle cx="530" cy="100" r="20"/><circle cx="145" cy="270" r="20"/><circle cx="530" cy="270" r="20"/></g>
+              <g class="topo-tower-label"><text x="145" y="104">A</text><text x="530" y="104">B</text><text x="145" y="274">D</text><text x="530" y="274">C</text></g>
+              <g class="topo-node-name"><text x="145" y="139">BTS-A</text><text x="530" y="139">BTS-B</text><text x="145" y="309">BTS-D</text><text x="530" y="309">BTS-C</text></g>
+              <circle class="core-halo" cx="340" cy="185" r="47" fill="none" stroke="#18c8bc" stroke-dasharray="4 6"/>
+              <circle cx="340" cy="185" r="32" fill="#103f49" stroke="#1ee4ca" stroke-width="1.5"/>
+              <text x="340" y="181" text-anchor="middle" fill="#c8fff4" font-size="12" font-weight="800" font-family="Arial">GSM</text><text x="340" y="196" text-anchor="middle" fill="#76cfc7" font-size="9" font-family="Arial">CORE</text>
+              <rect x="18" y="18" width="152" height="28" rx="6" fill="#101d2b" stroke="#2c4556"/><circle cx="33" cy="32" r="4" fill="#1fe0af"/><text x="45" y="36" font-size="10" fill="#a5bac9" font-family="Arial">TOPOLOGY ONLINE</text>
+              <text x="20" y="351" font-size="10" fill="#7692a5" font-family="Arial">4 VIRTUAL BTS NODES</text><text x="660" y="351" text-anchor="end" font-size="10" fill="#7692a5" font-family="Arial">COORDINATES: SYNTHETIC</text>
+            </svg></div>
+            <div class="topology-footer"><span><i class="legend-icon tower"></i> Base transceiver station</span><span><i class="legend-icon coverage"></i> Modeled cell coverage</span><span><i class="legend-icon core"></i> Logical network core</span></div>
+          </article>
+          <aside class="panel insights-panel">
+            <div class="panel-head"><div><div class="panel-kicker">MISSION FEED</div><h2>Experiment access</h2></div><span class="small-dot"></span></div>
+            <button class="module-entry" data-open="security"><span class="module-icon shield">◇</span><span><strong>Authentication lab</strong><small>RAND · SRES · Kc · encryption</small></span><span class="module-arrow">↗</span></button>
+            <button class="module-entry" data-open="localization"><span class="module-icon position">◎</span><span><strong>Positioning engine</strong><small>Cell-ID · Timing Advance · RSSI</small></span><span class="module-arrow">↗</span></button>
+            <button class="module-entry" data-open="handover"><span class="module-icon transfer">⇄</span><span><strong>Handover analyzer</strong><small>Intra-BSC · Inter-BSC · drops</small></span><span class="module-arrow">↗</span></button>
+            <button class="module-entry" data-open="validation"><span class="module-icon compare">▥</span><span><strong>Validation laboratory</strong><small>Monte Carlo · repeatability · CSV</small></span><span class="module-arrow">↗</span></button>
+            <div class="feed-bottom"><div class="feed-label"><span>PROJECT CONFIDENCE</span><span>TESTED MODELS</span></div><div class="feed-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><p>Software behavior is testable. Real-world GSM fidelity is not yet independently field-validated.</p></div>
+          </aside>
+        </div>
+        <div class="bottom-grid">
+          <div class="panel info-tile"><span class="info-symbol">◈</span><div><strong>Scientific integrity first</strong><p>Real algorithms produce measurable results. Failed scenarios and unknowns stay visible.</p></div></div>
+          <div class="panel info-tile"><span class="info-symbol cyan">⌘</span><div><strong>Reproducible by design</strong><p>Set a random seed, rerun a scenario, and export the underlying experiment data.</p></div></div>
+        </div>
+      </section>
+      <section id="page-security" class="page" aria-labelledby="security-title">
+        <div class="eyebrow"><span class="eyebrow-mark"></span> MODULE 01 / NETWORK SECURITY</div>
+        <div class="page-head"><div><h1 id="security-title">Authentication <em>lab.</em></h1><p>Watch both sides of a synthetic GSM-style challenge–response exchange.</p></div><span class="outline-tag">A3/A8 EDUCATIONAL SUBSTITUTE</span></div>
+        <div class="experiment-layout">
+          <div class="panel controls-panel"><div class="panel-kicker">EXPERIMENT CONFIGURATION</div><h2>Subscriber verification</h2><p class="subtext">Change the SIM credential scenario to test both permitted and rejected requests.</p>
+            <label class="field-label" for="authScenario">SIM CREDENTIAL SCENARIO</label><select id="authScenario"><option value="valid">Valid subscriber key</option><option value="invalid">Mismatched subscriber key</option></select>
+            <div class="help-note">The network and simulated SIM independently calculate the response. The verifier never sees a preselected success flag.</div>
+            <button id="authenticate" class="button accent wide">◇ &nbsp; Execute authentication</button>
+            <div class="control-rule"></div>
+            <h3>Optional cipher experiment</h3><label class="field-label" for="plainMessage">MESSAGE TO ENCRYPT</label><textarea id="plainMessage" rows="3" maxlength="500">Secure channel demonstration</textarea><button id="encryptMessage" class="button secondary wide">⌁ &nbsp; Encrypt and verify</button><p class="subtext small">Uses AES-GCM for demonstration, not the GSM A5 radio cipher.</p>
+          </div>
+          <div class="results-column"><div class="panel"><div class="panel-head"><div><div class="panel-kicker">CHALLENGE–RESPONSE TRACE</div><h2>Protocol event timeline</h2></div><span id="authBadge" class="panel-badge muted">AWAITING TEST</span></div><div class="timeline" id="authTimeline"><div class="empty-state">◇<strong>Ready to authenticate</strong><span>Run a scenario to inspect each verification step.</span></div></div></div>
+            <div class="panel"><div class="panel-head"><div><div class="panel-kicker">COMPUTATION OUTPUT</div><h2>Session values</h2></div></div><div class="value-grid"><div><small>CHALLENGE / RAND</small><code id="authRand">—</code></div><div><small>SESSION KEY / DEMO Kc</small><code id="authKc">—</code></div><div><small>EXPECTED RESPONSE</small><code id="authExpected">—</code></div><div><small>SIM RESPONSE</small><code id="authReceived">—</code></div></div><div id="cipherResult" class="cipher-result hidden"></div></div></div>
+        </div>
+      </section>
+      <section id="page-localization" class="page" aria-labelledby="location-title">
+        <div class="eyebrow"><span class="eyebrow-mark"></span> MODULE 02 / GEO-POSITIONING</div>
+        <div class="page-head"><div><h1 id="location-title">Localization <em>studio.</em></h1><p>Compare Cell-ID with RSSI trilateration against independently held ground truth.</p></div><span class="outline-tag">4 TOWERS · 2D SPACE</span></div>
+        <div class="experiment-layout">
+          <div class="panel controls-panel"><div class="panel-kicker">POSITIONING CONTROLS</div><h2>Place the mobile station</h2><p class="subtext">The environment knows the actual position; estimators receive synthetic signal observations only.</p>
+            <div class="range-label"><label for="locX">EAST–WEST / X</label><output id="locXOut">620 m</output></div><input type="range" id="locX" min="0" max="1800" step="20" value="620">
+            <div class="range-label"><label for="locY">NORTH–SOUTH / Y</label><output id="locYOut">780 m</output></div><input type="range" id="locY" min="0" max="1800" step="20" value="780">
+            <div class="range-label"><label for="locNoise">SHADOWING NOISE / σ</label><output id="locNoiseOut">3.0 dB</output></div><input type="range" id="locNoise" min="0" max="12" step=".5" value="3">
+            <label class="field-label" for="locSeed">REPRODUCIBILITY SEED</label><input type="number" id="locSeed" value="42" min="0" max="10000000">
+            <button id="runLocation" class="button accent wide">◎ &nbsp; Calculate position estimate</button>
+            <div class="help-note">Timing Advance represents an approximate radial distance bin and cannot independently determine 2D position.</div>
+          </div>
+          <div class="results-column"><div class="three-metrics"><div class="mini-metric"><small>CELL-ID ERROR</small><strong id="cellError">—</strong><span>metres</span></div><div class="mini-metric"><small>TRILATERATION ERROR</small><strong id="triError">—</strong><span>metres</span></div><div class="mini-metric"><small>GSM TIMING ADVANCE</small><strong id="taValue">—</strong><span id="taRange">distance bin</span></div></div>
+            <div class="panel map-panel"><div class="panel-head"><div><div class="panel-kicker">COORDINATE FIELD</div><h2>Measured vs. actual position</h2></div><span class="panel-badge">X / Y METRES</span></div><div id="locationMap" class="plot-box"><div class="empty-state">◎<strong>Position map</strong><span>Run localization to display towers and estimates.</span></div></div><div class="chart-legend"><span><i style="background:#28dbc4"></i> BTS tower</span><span><i style="background:#d6f3fe"></i> Actual position</span><span><i style="background:#ffa45c"></i> Trilateration estimate</span><span><i style="background:#8c92ff"></i> Cell-ID estimate</span></div></div>
+            <div class="panel compact-panel"><div class="panel-head"><div><div class="panel-kicker">SYNTHETIC RF MEASUREMENTS</div><h2>Base station readings</h2></div></div><div class="table-scroll"><table><thead><tr><th>BASE STATION</th><th>RX SIGNAL</th><th>EST. RANGE</th><th>TA</th></tr></thead><tbody id="locReadings"><tr><td colspan="4" class="placeholder-row">No measurements yet</td></tr></tbody></table></div></div></div>
+        </div>
+      </section>
+      <section id="page-handover" class="page" aria-labelledby="handover-title">
+        <div class="eyebrow"><span class="eyebrow-mark"></span> MODULE 03 / MOBILITY MANAGEMENT</div>
+        <div class="page-head"><div><h1 id="handover-title">Handover <em>engine.</em></h1><p>Simulate mobility, competing signal strengths, controller transitions, and failure conditions.</p></div><span class="outline-tag">STATEFUL DECISION ENGINE</span></div>
+        <div class="experiment-layout"><div class="panel controls-panel"><div class="panel-kicker">MOBILITY PROFILE</div><h2>Configure the call</h2><p class="subtext">Transfer decisions depend on measured signal advantage and a time-to-trigger rule.</p>
+          <div class="range-label"><label for="hoNoise">SIGNAL NOISE / σ</label><output id="hoNoiseOut">1.0 dB</output></div><input type="range" id="hoNoise" min="0" max="8" step=".5" value="1">
+          <div class="range-label"><label for="hoMargin">HANDOVER HYSTERESIS</label><output id="hoMarginOut">3.0 dB</output></div><input type="range" id="hoMargin" min="0" max="12" step=".5" value="3">
+          <div class="range-label"><label for="hoTrigger">TIME-TO-TRIGGER</label><output id="hoTriggerOut">2 samples</output></div><input type="range" id="hoTrigger" min="1" max="10" step="1" value="2">
+          <label class="switch-row"><span><strong>Inject coverage dead zone</strong><small>Force a realistic-looking call failure</small></span><input type="checkbox" id="hoDead"></label>
+          <label class="switch-row"><span><strong>Block BTS-B resources</strong><small>Target cell cannot accept transfer</small></span><input type="checkbox" id="hoBlocked"></label>
+          <button id="runHandover" class="button accent wide">⇄ &nbsp; Execute mobility scenario</button>
+          <div class="help-note">Handover delay (120/240 ms) is an explicitly assumed parameter—not measured operator latency.</div>
+        </div>
+        <div class="results-column"><div class="three-metrics"><div class="mini-metric"><small>HANDOVER EVENTS</small><strong id="hoCount">—</strong><span>successful transitions</span></div><div class="mini-metric"><small>CALL STATUS</small><strong id="hoStatus">—</strong><span>modeled outcome</span></div><div class="mini-metric"><small>ASSUMED DELAY</small><strong id="hoDelay">—</strong><span>milliseconds total</span></div></div>
+          <div class="panel map-panel"><div class="panel-head"><div><div class="panel-kicker">MOBILITY TIMELINE</div><h2>Signal strength by cell</h2></div><button id="hoCSV" class="button tiny secondary" disabled>↓ EXPORT CSV</button></div><div class="plot-box signal-chart" id="handoverChart"><div class="empty-state">⇄<strong>Signal trace</strong><span>Run the call to compare competing BTS signals.</span></div></div><div class="chart-legend"><span><i style="background:#2adebd"></i> BTS-A</span><span><i style="background:#51aaff"></i> BTS-B</span><span><i style="background:#f4a255"></i> BTS-C</span><span><i style="background:#b98dff"></i> BTS-D</span></div></div>
+          <div class="panel compact-panel"><div class="panel-head"><div><div class="panel-kicker">NETWORK EVENTS</div><h2>Handover event log</h2></div></div><div class="event-list" id="handoverEvents"><div class="empty-state small-empty">No mobility events yet.</div></div></div>
+        </div></div>
+      </section>
+      <section id="page-validation" class="page" aria-labelledby="validation-title">
+        <div class="eyebrow"><span class="eyebrow-mark"></span> MODULE 04 / SCIENTIFIC VALIDATION</div>
+        <div class="page-head"><div><h1 id="validation-title">Validation <em>laboratory.</em></h1><p>Reproduce experiments, measure uncertainty, and export failure-inclusive data.</p></div><span class="outline-tag">SEE THE FAILURES TOO</span></div>
+        <div class="experiment-layout"><div class="panel controls-panel"><div class="panel-kicker">BATCH EXPERIMENT SETUP</div><h2>Configure the trial set</h2><p class="subtext">Each run generates repeatable synthetic observations for the localization and mobility algorithms.</p>
+          <div class="range-label"><label for="batchCount">NUMBER OF TRIALS</label><output id="batchCountOut">40</output></div><input id="batchCount" type="range" min="5" max="200" value="40" step="5">
+          <div class="range-label"><label for="batchNoise">RADIO NOISE / σ</label><output id="batchNoiseOut">3.0 dB</output></div><input id="batchNoise" type="range" min="0" max="12" value="3" step=".5">
+          <div class="range-label"><label for="batchMargin">HANDOVER MARGIN</label><output id="batchMarginOut">3.0 dB</output></div><input id="batchMargin" type="range" min="0" max="12" value="3" step=".5">
+          <label class="field-label" for="batchSeed">RANDOM SEED</label><input id="batchSeed" type="number" min="0" max="10000000" value="42">
+          <button id="runBatch" class="button accent wide">▥ &nbsp; Run validation suite</button>
+          <div class="help-note">The same seed and inputs produce identical trial data. Synthetic results alone do not validate performance on a real cellular network.</div>
+        </div><div class="results-column"><div class="three-metrics"><div class="mini-metric"><small>MEAN CELL-ID ERROR</small><strong id="batchCell">—</strong><span>metres</span></div><div class="mini-metric"><small>MEAN MULTI-TOWER ERROR</small><strong id="batchTri">—</strong><span>metres</span></div><div class="mini-metric"><small>DEAD-ZONE DROP RATE</small><strong id="batchDrop">—</strong><span>percentage</span></div></div>
+          <div class="panel"><div class="panel-head"><div><div class="panel-kicker">MONTE CARLO ERROR COMPARISON</div><h2>Localization performance</h2></div><button class="button tiny secondary" id="batchCSV" disabled>↓ EXPORT CSV</button></div><div id="batchChart" class="plot-box signal-chart"><div class="empty-state">▥<strong>Trial comparison</strong><span>Execute a validation suite to reveal model error.</span></div></div></div>
+          <div class="panel compact-panel"><div class="panel-head"><div><div class="panel-kicker">METHODOLOGY NOTES</div><h2>Interpret the results correctly</h2></div></div><div class="method-grid"><div><b>01</b><strong>Reference truth withheld</strong><span>Estimators receive measurements, not original coordinates.</span></div><div><b>02</b><strong>Reproducible randomness</strong><span>Fixed seeds allow experiments to be verified.</span></div><div><b>03</b><strong>Negative cases included</strong><span>Weak signals and blocked transfers are never hidden.</span></div><div><b>04</b><strong>Not field validated</strong><span>Real-world GSM claims require independent RF datasets.</span></div></div></div>
+        </div></div>
+      </section>
+      <footer class="footer"><span>© SIGNALCORE · GSM SECURITY & MOBILITY ENGINEERING LAB</span><span>BUILT FOR ACADEMIC SIMULATION <i>●</i> PYTHON COMPUTE ENGINE</span></footer>
+    </main>
+  </div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="/static/app.js" defer></script>
+</body>
+</html>
